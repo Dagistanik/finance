@@ -3,10 +3,12 @@ package com.mycompany.currencyexchangeservice.repository;
 import com.mycompany.currencyexchangeservice.model.ExchangeRate;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.Optional;
 
+@Repository
 public interface ExchangeRateRepository extends JpaRepository<ExchangeRate, Long> {
     Optional<ExchangeRate> findByCurrencyPairAndDate(String currencyPair, LocalDate date);
 

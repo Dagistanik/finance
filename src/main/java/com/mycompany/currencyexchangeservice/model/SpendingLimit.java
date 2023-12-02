@@ -2,10 +2,16 @@ package com.mycompany.currencyexchangeservice.model;
 
 import com.mycompany.currencyexchangeservice.enums.ExpenseCategory;
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@Getter
+@Setter
+@EqualsAndHashCode(of = "id")
 @Entity
 @Table(name = "spending_limits")
 public class SpendingLimit {
@@ -23,5 +29,14 @@ public class SpendingLimit {
     @Column(name = "expense_category")
     private ExpenseCategory expenseCategory;
 
-    // Конструкторы, геттеры и сеттеры
+    public void setLimitSettingDate(LocalDate limitSettingDate) {
+        LocalDate today = LocalDate.now();
+        if (limitSettingDate.isAfter(today)) {
+            throw new IllegalArgumentException("Limit setting date cannot be in the future.");
+        }
+        if (limitSettingDate.isBefore(today)) {
+            throw new IllegalArgumentException("Limit setting date cannot be in the past.");
+        }
+        this.limitSettingDate = limitSettingDate;
+    }
 }

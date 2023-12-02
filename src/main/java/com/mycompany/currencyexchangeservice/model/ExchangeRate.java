@@ -1,10 +1,16 @@
 package com.mycompany.currencyexchangeservice.model;
 
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@Getter
+@Setter
+@EqualsAndHashCode(of = "id")
 @Entity
 @Table(name = "exchange_rates")
 public class ExchangeRate {
@@ -23,6 +29,4 @@ public class ExchangeRate {
 
     @Column(name = "currency_pair")
     private String currencyPair;
-
-    // Конструкторы, геттеры и сеттеры
 }
